@@ -167,6 +167,9 @@ exec /docker-entrypoint.sh "$@"
       - "9042:9042"
     links:
       - connect
+      
+Please see https://www.instaclustr.com/support/documentation/announcements/instaclustr-open-source-project-status/ for Instaclustr support status of this project.
+      
 ```
 ## Do some data exploration with kibana
 1. [Navigate to Kibana](http://localhost:5601/app/kibana#/management/kibana/index_pattern?_g=())
