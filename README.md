@@ -103,7 +103,7 @@ look at the configuration for the elk connector
 * look at the configuration for the cassandra connector
 [link to connector source code](https://github.com/lensesio/stream-reactor/tree/master/kafka-connect-cassandra)
 
-    ```
+```
 {
   "name": "utccassandra",
   "config": {
@@ -121,7 +121,7 @@ look at the configuration for the elk connector
 
 * look at the boot up process for cassandra
 
-    ```
+```
 cat >/import.cql <<EOF
 DROP keyspace test;
 CREATE keyspace test with replication = {'class':'SimpleStrategy', 'replication_factor' : 1} AND durable_writes = true;
@@ -136,8 +136,8 @@ EOF
 
 * look at docker compose 
     
-    ```
-      cassandra:
+```
+cassandra:
     image: cassandra:3.0.20
     volumes:
       - "./cassandra-init.sh:/cassandra-init.sh"
@@ -146,9 +146,11 @@ EOF
       - "9042:9042"
     links:
       - connect
-    ```
+```
 
 # You may add some other conditionals that fits your stuation here
+
+```
 until cqlsh -f /import.cql; do
   echo "cqlsh: Cassandra is unavailable to initialize - will retry later"
   sleep 2
@@ -156,6 +158,7 @@ done &
 
 exec /docker-entrypoint.sh "$@"
 ```
+
   * docker-compose program entry
 ```
   cassandra:
@@ -167,12 +170,13 @@ exec /docker-entrypoint.sh "$@"
       - "9042:9042"
     links:
       - connect
-      
-Please see https://www.instaclustr.com/support/documentation/announcements/instaclustr-open-source-project-status/ for Instaclustr support status of this project.
-      
 ```
+
+
 ## Do some data exploration with kibana
 1. [Navigate to Kibana](http://localhost:5601/app/kibana#/management/kibana/index_pattern?_g=())
 
-![alt text](./kibana.png "Logo Title Text 1")
-![alt text](./timeseries.png "Logo Title Text 1")
+![alt text](./kibana.png "Kibana")
+![alt text](./timeseries.png "Time series")
+
+Please see https://www.instaclustr.com/support/documentation/announcements/instaclustr-open-source-project-status/ for Instaclustr support status of this project.
